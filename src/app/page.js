@@ -7,12 +7,19 @@ export default function Home() {
   const [datos, setDatos] = useState();
 
   useEffect(() => {
-    const promesa = fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${KEY}&units=metric`);
+    const promesa = fetch(
+      `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${KEY}&units=metric`
+    );
     Promise.all([promesa]).then(async (values) => {
       const data = await values[0].json();
       setDatos(data);
     });
   }, []);
 
-  return <div>{datos && JSON.stringify(datos)}</div>;
+  return (
+    <div>
+      <h1>Fetch de Weather API</h1>
+      {datos && JSON.stringify(datos)}
+    </div>
+  );
 }
